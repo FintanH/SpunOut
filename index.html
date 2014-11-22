@@ -22,11 +22,11 @@
 
       <script type="text/javascript">
 
-      function swap(template,replace) {
+      function swap(template,replace,data) {
           var source   = $("#"+template).html();
           var template = Handlebars.compile(source);
 
-          $(replace).html(template);
+          $(replace).html(template(data));
       }
 
       $().ready( function(){
@@ -41,36 +41,36 @@
     }
 
     function clickedChat() {
-        swap("chat_list","#cont_body");
+        swap("chat_list","#cont_body",{
+            "titles" : [{"title":"Gf problems"},
+                        {"title":"Feeling blue"},
+                        {"title":"School sucks"}]
+                    });;
 
     }
     function clickedWriteStory() {
         swap("write_story","#cont_body");
     }
 </script>
+
 <script id="write_story" type="text/x-handlebars-template">
 <div class="container">
 <div class="row">
 <div class="col-sm-4">
 <div class="panel panel-primary">
 <div class="panel-heading">
-<h3 class="panel-title">Title</h3>
+<h3 class="panel-title"><input></input></h3>
 </div>
 <div class="panel-body">
-Title content
+<textarea>
+</textarea>
 </div>
 </div>
 </div><!-- /.col-sm-4 -->
 </div>
 </div> <!-- /container -->
 
-<div class="container">
-<div class="well">
-<p>
-Description
-</p>
-</div>
-</div>
+
 <div class="container">
 
 <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
@@ -81,9 +81,9 @@ Description
   <script id="problem" type="text/x-handlebars-template">
   <div class="nav">
   <ul class="nav nav-pills" role="tablist">
-  <li role="presentation" class="active"><a href="javascript:'return false'" onclick="clickedHome()">Home</a></li>
-  <li role="presentation"><a href="javascript:'return false'" onclick="clickedChat()">Chat</a></li>
-  <li role="presentation"><a href="javascript:'return false'" onclick="clickedWriteStory()">Write Story</a></li>
+  <li role="presentation" class="active"><a onclick="clickedHome()">Home</a></li>
+  <li role="presentation"><a href="#" onclick="clickedChat()">Chat</a></li>
+  <li role="presentation"><a onclick="clickedWriteStory()">Write Story</a></li>
   </ul>
   <p/>
   </div>
@@ -91,32 +91,26 @@ Description
   <div id="cont_body">
   <div class="container">
   <div class="row">
-  <div class="col-sm-4">
+  <div class="col-sm-12">
   <div class="panel panel-primary">
   <div class="panel-heading">
-  <h3 class="panel-title">{{Title}}</h3>
+  <h3 class="panel-title">{{title}}</h3>
   </div>
   <div class="panel-body">
-  {{TitleContent}}
+  {{description}}
   </div>
   </div>
   </div>
   </div>
   </div>
 
-  <div class="container">
-  <div class="well">
-  <p>
-  {{Description}}
-  </p>
-  </div>
-  </div>
+
 
   <div class="container">
   <div class=btn-group-horizontal>
-  <button class="btn btn-sm btn-primary btn-block">Next</button>
-  <button class="btn btn-sm btn-primary btn-block">i</button>
-  <button class="btn btn-sm btn-primary btn-block">:)</button>
+  <button class="btn btn-lg btn-primary btn-inline" style="width:31%; height: 100px">Next</button>
+  <button class="btn btn-lg btn-primary btn-inline" style="width:31%; height: 100px">i</button>
+  <button class="btn btn-lg btn-primary btn-inline" style="width:31%; height: 100px">:)</button>
   </div>
   </div>
   </div>
@@ -129,29 +123,21 @@ Description
 <div class="col-sm-4">
 <div class="panel panel-primary">
 <div class="panel-heading">
-<h3 class="panel-title">{{Title}}</h3>
+<h3 class="panel-title">{{title}}</h3>
 </div>
 <div class="panel-body">
-{{TitleContent}}
+{{description}}
 </div>
 </div>
 </div>
-</div>
-</div>
-
-<div class="container">
-<div class="well">
-<p>
-{{Description}}
-</p>
 </div>
 </div>
 
 <div class="container">
 <div class=btn-group-horizontal>
-<button class="btn btn-sm btn-primary btn-block">Next</button>
-<button class="btn btn-sm btn-primary btn-block">i</button>
-<button class="btn btn-sm btn-primary btn-block">:)</button>
+<button class="btn btn-lg btn-primary btn-inline" style="width:31%; height: 100px">Next</button>
+<button class="btn btn-lg btn-primary btn-inline" style="width:31%; height: 100px">i</button>
+<button class="btn btn-lg btn-primary btn-inline" style="width:31%; height: 100px">:)</button>
 </div>
 </div>
 </script>
@@ -169,7 +155,7 @@ Description
           username:$("#inputEmail").val(),
           password:$("#inputPassword").val()
       }
-      swap("problem","body");
+      swap("problem","body",{title:"School sucks", description:"School is a bummer, is really stupid" });
     //   get_problems(user,function(problems){
     //       swap("problem","body");
     //   },function(fail){
