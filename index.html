@@ -10,7 +10,9 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Signin Template for Bootstrap</title>
+    <script type="text/javascript" src="/scripts/handlebars-0.9.0.pre.4.js" />
+
+    <title>Talk2Me</title>
 
     <!-- Bootstrap core CSS -->
     <link href="./dist/css/bootstrap.min.css" rel="stylesheet">
@@ -20,6 +22,33 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <script id="User-Story" type="text/javascript">
+    	<div class="container">
+	    	<div class="row">
+		        <div class="col-sm-4">
+		          <div class="panel panel-primary">
+		            <div class="panel-heading">
+		              <h3 class="panel-title">{{Title}}</h3>
+		            </div>
+		            <div class="panel-body">
+		              {{TitleContent}}
+		            </div>
+		          </div>
+		        </div><!-- /.col-sm-4 -->
+        	</div>
+    	</div> <!-- /container -->
+
+	    <div class="container">
+	    	<div class="well">
+		        <p>
+		        	{{Description}}
+		        </p>
+		     	</div>
+	    	</div>
+	    <div class="container">
+    </script>
+
   </head>
 
   <body>
@@ -34,34 +63,10 @@
 	</div>
 
     <div class="container">
-    	<div class="row">
-        <div class="col-sm-4">
-          <div class="panel panel-primary">
-            <div class="panel-heading">
-              <h3 class="panel-title">Title</h3>
-            </div>
-            <div class="panel-body">
-              Title content
-            </div>
-          </div>
-        </div><!-- /.col-sm-4 -->
-        </div>
-    </div> <!-- /container -->
-
-    <div class="container">
-    	<div class="well">
-	        <p>
-	        	Description
-	        </p>
-	     	</div>
-    	</div>
-    <div class="container">
-
-    <div class="container">
     	<div class=btn-group-horizontal>
 			<button class="btn btn-sm btn-primary btn-block">Next</button>
-			<button class="btn btn-sm btn-primary btn-block">Next</button>
-			<button class="btn btn-sm btn-primary btn-block">Next</button>
+			<button class="btn btn-sm btn-primary btn-block">i</button>
+			<button class="btn btn-sm btn-primary btn-block">:)</button>
 		</div>
 	</div>
 
