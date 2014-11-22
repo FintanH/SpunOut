@@ -37,22 +37,53 @@
 
 <script>
     function clickedHome() {
-
+        swap("problem_ext","#cont_body");
     }
 
     function clickedChat() {
         swap("chat_list","#cont_body");
 
     }
+    function clickedWriteStory() {
+        swap("write_story","#cont_body");
+    }
+</script>
+<script id="write_story" type="text/x-handlebars-template">
+<div class="container">
+<div class="row">
+<div class="col-sm-4">
+<div class="panel panel-primary">
+<div class="panel-heading">
+<h3 class="panel-title">Title</h3>
+</div>
+<div class="panel-body">
+Title content
+</div>
+</div>
+</div><!-- /.col-sm-4 -->
+</div>
+</div> <!-- /container -->
+
+<div class="container">
+<div class="well">
+<p>
+Description
+</p>
+</div>
+</div>
+<div class="container">
+
+<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+
 </script>
 
 
   <script id="problem" type="text/x-handlebars-template">
   <div class="nav">
   <ul class="nav nav-pills" role="tablist">
-  <li role="presentation" class="active"><a href="javascript:'return false'">Home</a></li>
+  <li role="presentation" class="active"><a href="javascript:'return false'" onclick="clickedHome()">Home</a></li>
   <li role="presentation"><a href="javascript:'return false'" onclick="clickedChat()">Chat</a></li>
-  <li role="presentation"><a href="javascript:'return false'">Write Story</a></li>
+  <li role="presentation"><a href="javascript:'return false'" onclick="clickedWriteStory()">Write Story</a></li>
   </ul>
   <p/>
   </div>
@@ -92,6 +123,38 @@
   </script>
 
 
+<script id="problem_ext" type="text/x-handlebars-template">
+<div class="container">
+<div class="row">
+<div class="col-sm-4">
+<div class="panel panel-primary">
+<div class="panel-heading">
+<h3 class="panel-title">{{Title}}</h3>
+</div>
+<div class="panel-body">
+{{TitleContent}}
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container">
+<div class="well">
+<p>
+{{Description}}
+</p>
+</div>
+</div>
+
+<div class="container">
+<div class=btn-group-horizontal>
+<button class="btn btn-sm btn-primary btn-block">Next</button>
+<button class="btn btn-sm btn-primary btn-block">i</button>
+<button class="btn btn-sm btn-primary btn-block">:)</button>
+</div>
+</div>
+</script>
 
 
 
