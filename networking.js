@@ -78,11 +78,11 @@ function get_chat(id,user,success,fail) {
 	)
 };
 
-function make_decision(problem_id,outcome,user,success,fail) {
+function make_decision(problem,outcome,user,success,fail) {
 	$.ajax(
 		method: "POST",
 		data: {
-			problem_id: problem_id,
+			problem_id: problem.id,
 			outcome: outcome
 		},
 		url:url+"/problem.json",
@@ -93,3 +93,19 @@ function make_decision(problem_id,outcome,user,success,fail) {
 		error:fail
 	);
 };
+
+function send_message(message,chat,user,success,fail) {
+	$.ajax(
+		method: "POST",
+		data: {
+			decision_id: chat.id,
+			outcome: outcome
+		},
+		url:url+"/conversation_message.json",
+		username:user.username,
+		password:user.password,
+		success: success,
+		dataType: "json",
+		error:fail
+	);
+}
