@@ -1,7 +1,7 @@
 var url = 'http://talktome-spunout.herokuapp.com'
 
 function signup(email,password,confirm_password,success,fail) {
-	$.ajax(
+	$.ajax({
 		method: "POST",
 		data: {
 			email: email,
@@ -9,34 +9,38 @@ function signup(email,password,confirm_password,success,fail) {
 			password_confirmation: confirm_password
 		},
 		url:url+"/user.json",
-		username:user.username,
-		password:user.password,
 		success: success(
 			{
-				username:username,
+				username:email,
 				password:password
 			}
 		),
 		dataType: "json",
-		error:fail
-	);
+		error: function(xhr, status, error) {
+			// var err = eval("(" + xhr.responseText + ")");
+			// fail(err.Message);
+		}
+	});
 };
 
 function get_problems(user,success,fail) {
-	$.ajax(
+	$.ajax({
 		method: "GET",
 		url:url+"/problem.json",
 		username:user.username,
 		password:user.password,
 		success: success,
 		dataType: "json",
-		error:fail
-	);
+		error: function(xhr, status, error) {
+			var err = eval("(" + xhr.responseText + ")");
+			fail(err.Message);
+		}
+	});
 };
 
 
 function post_problem(user,title,description,success,fail) {
-	$.ajax(
+	$.ajax({
 		method: "POST",
 		data: {
 			title: title,
@@ -47,13 +51,16 @@ function post_problem(user,title,description,success,fail) {
 		password:user.password,
 		success: success,
 		dataType: "json",
-		error:fail
-	);
+		error: function(xhr, status, error) {
+			var err = eval("(" + xhr.responseText + ")");
+			fail(err.Message);
+		}
+	});
 };
 
 
 function get_chats(user, success, fail) {
-	$.ajax(
+	$.ajax({
 		method: "GET",
 		data: null,
 		url: url+"/decision.json",
@@ -61,12 +68,15 @@ function get_chats(user, success, fail) {
 		password:user.password,
 		success:success,
 		dataType: "json",
-		error:fail
-	)
+		error: function(xhr, status, error) {
+			var err = eval("(" + xhr.responseText + ")");
+			fail(err.Message);
+		}
+	})
 };
 
 function get_chat(id,user,success,fail) {
-	$.ajax(
+	$.ajax({
 		method: "GET",
 		data: null,
 		url: url+"/decision/"+id+".json",
@@ -74,12 +84,15 @@ function get_chat(id,user,success,fail) {
 		password:user.password,
 		success:success,
 		dataType: "json",
-		error:fail
-	)
+		error: function(xhr, status, error) {
+			var err = eval("(" + xhr.responseText + ")");
+			fail(err.Message);
+		}
+	})
 };
 
 function make_decision(problem,outcome,user,success,fail) {
-	$.ajax(
+	$.ajax({
 		method: "POST",
 		data: {
 			problem_id: problem.id,
@@ -90,12 +103,15 @@ function make_decision(problem,outcome,user,success,fail) {
 		password:user.password,
 		success: success,
 		dataType: "json",
-		error:fail
-	);
+		error: function(xhr, status, error) {
+			var err = eval("(" + xhr.responseText + ")");
+			fail(err.Message);
+		}
+	});
 };
 
 function send_message(message,chat,user,success,fail) {
-	$.ajax(
+	$.ajax({
 		method: "POST",
 		data: {
 			decision_id: chat.id,
@@ -106,6 +122,9 @@ function send_message(message,chat,user,success,fail) {
 		password:user.password,
 		success: success,
 		dataType: "json",
-		error:fail
-	);
+		error: function(xhr, status, error) {
+			var err = eval("(" + xhr.responseText + ")");
+			fail(err.Message);
+		}
+	});
 }

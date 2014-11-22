@@ -3,49 +3,218 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
 
-    <script type="text/javascript" src="/scripts/handlebars-0.9.0.pre.4.js" />
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="icon" href="../../favicon.ico">
 
-    <title>Talk2Me</title>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <script type="text/javascript" src="dist/js/handlebars-v2.0.0.js" > </script>
+      <script type="text/javascript" src="networking.js" > </script>
 
-    <!-- Bootstrap core CSS -->
-    <link href="./dist/css/bootstrap.min.css" rel="stylesheet">
+      <title>Talk2Me</title>
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+      <!-- Bootstrap core CSS -->
+      <link href="./dist/css/bootstrap.min.css" rel="stylesheet">
+
+      <script type="text/javascript">
+
+      function swap(template,replace) {
+          var source   = $("#"+template).html();
+          var template = Handlebars.compile(source);
+
+          $(replace).html(template);
+      }
+
+      $().ready( function(){
+          swap("login","body");
+
+      } );
+      </script>
+
+<script>
+    function clickedHome() {
+
+    }
+
+    function clickedChat() {
+        swap("chat_list","#cont_body");
+
+    }
+</script>
+
+
+  <script id="problem" type="text/x-handlebars-template">
+  <div class="nav">
+  <ul class="nav nav-pills" role="tablist">
+  <li role="presentation" class="active"><a href="javascript:'return false'">Home</a></li>
+  <li role="presentation"><a href="javascript:'return false'" onclick="clickedChat()">Chat</a></li>
+  <li role="presentation"><a href="javascript:'return false'">Write Story</a></li>
+  </ul>
+  <p/>
+  </div>
+
+  <div id="cont_body">
+  <div class="container">
+  <div class="row">
+  <div class="col-sm-4">
+  <div class="panel panel-primary">
+  <div class="panel-heading">
+  <h3 class="panel-title">{{Title}}</h3>
+  </div>
+  <div class="panel-body">
+  {{TitleContent}}
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+
+  <div class="container">
+  <div class="well">
+  <p>
+  {{Description}}
+  </p>
+  </div>
+  </div>
+
+  <div class="container">
+  <div class=btn-group-horizontal>
+  <button class="btn btn-sm btn-primary btn-block">Next</button>
+  <button class="btn btn-sm btn-primary btn-block">i</button>
+  <button class="btn btn-sm btn-primary btn-block">:)</button>
+  </div>
+  </div>
+  </div>
+  </script>
+
+
+
+
+
+
+
+  <script>
+
+  var global_user = null;
+
+  function pressed_signin() {
+      user = {
+          username:$("#inputEmail").val(),
+          password:$("#inputPassword").val()
+      }
+      swap("problem","body");
+    //   get_problems(user,function(problems){
+    //       swap("problem","body");
+    //   },function(fail){
+    //       console.log(fail.responseText.Message());
+    //   })
+  }
+
+</script>
+
+  <script id="login" type="text/x-handlebars-template">
+  <div class="container">
+
+  <form class="form-signin" role="form" onsubmit="return false">
+  <h2 class="form-signin-heading">Please sign in</h2>
+  <label for="inputEmail" class="sr-only">Email address</label>
+  <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+  <label for="inputPassword" class="sr-only">Password</label>
+  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+  <div class="checkbox">
+  <label>
+  <input type="checkbox" value="remember-me"> Remember me
+  </label>
+  </div>
+  <button class="btn btn-lg btn-primary btn-block"  onclick="pressed_signin();">Sign in</button>
+  <button class="btn btn-lg btn-secondary btn-block" onclick="swap('signup','body');">Sign up</button>
+  </form>
+
+  </div> <!-- /container -->
+  </script>
+  <script id="chat" type="text/x-handlebars-template">
+  <div class="container">
+  <div class="page-header">
+  <h1>{{title}}</h1>
+  </div>
+  {{#each messages}}
+  <div class="alert" role="alert"> {{message}} </div>
+  {{/each}}
+  </div>
+  </script>
+
+
+
+
+
+
+
+
+
+  <script id="chat_list" type="text/x-handlebars-template">
+  <div class="col-sm-4">
+  <div class="list-group">
+  {{#each titles}}
+  <div class="alert" role="alert"> {{title}} </div>
+  {{/each}}
+  </div>
+  </div>
+  </script>
+
+
+
+
+
+
+
+
+<script>
+function pressed_signup() {
+    swap("problem","body");
+    // signup($("#inputEmail").val(),$("#inputPassword").val(),$("#inputPassword").val(),function(user){
+    //     global_user = user;
+    //     swap("problem","body");
+    // },function(fail){
+    //     console.log(fail.responseText.Message());
+    // });
+}
+</script>
+
+
+
+<script id="signup" type="text/x-handlebars-template">
+  <div class="container">
+
+      <form class="form-signin" role="form" onsubmit="return false">
+          <h2 class="form-signin-heading">Please sign up</h2>
+          <label for="inputEmail" class="sr-only">Email address</label>
+          <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+          <label for="inputPassword" class="sr-only">Password</label>
+          <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+          <div class="checkbox">
+              <label>
+                  <input type="checkbox" value="remember-me"> Remember me
+              </label>
+          </div>
+          <button class="btn btn-lg btn-primary btn-block" onclick="pressed_signup()">Submit</button>
+      </form>
+
+  </div> <!-- /container -->
+</script>
+
+
+
 
 
   </head>
 
   <body>
 
-  	<div class="nav">
-		<ul class="nav nav-pills" role="tablist">
-			<li role="presentation" class="active"><a href="#">Home</a></li>
-			<li role="presentation"><a href="#">Chat</a></li>
-			<li role="presentation"><a href="#">Write Story</a></li>
-		</ul>
-		<p/>
-	</div>
 
-    <div class="container">
-    	<div class=btn-group-horizontal>
-			<button class="btn btn-sm btn-primary btn-block">Next</button>
-			<button class="btn btn-sm btn-primary btn-block">i</button>
-			<button class="btn btn-sm btn-primary btn-block">:)</button>
-		</div>
-	</div>
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
